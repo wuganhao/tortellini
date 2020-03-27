@@ -1,0 +1,26 @@
+name: Push Build
+
+on:
+  push:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        clean: true
+        fetch-depth: 1
+
+    - name: Setup NuGet
+      uses: warrenbuckley/Setup-Nuget@v1
+
+    - name: Nuget Pack
+      working-directory: .
+      run: nuget pack torteliniw.nuspec -version 1.0.0-rc1 -OutputFileNamesWithoutVersion -OutputDirectory dist
+      
+    - name: Nuget Push
+      working-directory: .
+      run: nuget push dist\torteliniw.nupkg -ApiKey ${{secrets.nuget_api_key}} -Source https://api.nuget.org/v3/index.json

@@ -14,17 +14,20 @@ jobs:
         clean: true
         fetch-depth: 1
         
-    - name: Show Environment
-      run: echo Current ref - ${{GITHUB.REF}}
+#    - name: Show Environment
+#      run: echo Current ref - ${{GITHUB.REF}}
 
     - name: Setup NuGet
       uses: warrenbuckley/Setup-Nuget@v1
 
     - name: Nuget Pack
       working-directory: .
-      run: nuget pack torteliniw.nuspec -version 1.0.0-rc1 -OutputFileNamesWithoutVersion -OutputDirectory dist
+      if: !startsWith(github.ref, 'refs/tags/')
+      run: nuget pack torteliniw.nuspec -version 1.0.0-dev -OutputFileNamesWithoutVersion -OutputDirectory dist
       
-    - name: Nuget Push
-#      if: startWith(github.ref, 'heads/tags/')
+    - name: Nuget Pack/Push
+      if: startsWith(github.ref, 'heads/tags/')
       working-directory: .
-      run: nuget push dist\torteliniw.nupkg -ApiKey ${{secrets.nuget_api_key}} -Source https://api.nuget.org/v3/index.json
+      run: |
+        nuget pack torteliniw.nuspec -version ${{GITHUB.REF##*/}} -OutputFileNamesWithoutVersion -OutputDirectory dist
+        nuget push dist\torteliniw.nupkg -ApiKey ${{secrets.nuget_api_key}} -Source https://api.nuget.org/v3/index.json

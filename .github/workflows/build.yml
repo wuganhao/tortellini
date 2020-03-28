@@ -25,6 +25,6 @@ jobs:
       run: nuget pack torteliniw.nuspec -version 1.0.0-rc1 -OutputFileNamesWithoutVersion -OutputDirectory dist
       
     - name: Nuget Push
-      if: startWith(github.ref, 'heads/tags/')
+#      if: startWith(github.ref, 'heads/tags/')
       working-directory: .
       run: nuget push dist\torteliniw.nupkg -ApiKey ${{secrets.nuget_api_key}} -Source https://api.nuget.org/v3/index.json

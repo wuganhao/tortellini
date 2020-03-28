@@ -10,7 +10,6 @@
     <description>wide string version of tortelini package</description>
     <releaseNotes>wide string version of tortelini package</releaseNotes>
     <tags>torteliniw tortelini</tags>
-    <readme>readme.md</readme>
   </metadata>
   <files>
     <file src="readme.md" target="readme.md" />

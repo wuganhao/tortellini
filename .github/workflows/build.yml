@@ -15,7 +15,7 @@ jobs:
         fetch-depth: 1
         
     - name: Show Environment
-      run: echo "Current ref: ${{ github.ref }}"
+      run: echo Current ref: ${GITHUB_REF}
 
     - name: Setup NuGet
       uses: warrenbuckley/Setup-Nuget@v1

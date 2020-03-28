@@ -13,6 +13,7 @@
   </metadata>
   <files>
     <file src="readme.md" target="readme.md" />
-    <file src="tortellini.h" target="build\include\tortellini.h" />
+    <file src="tortellini.h" target="build\include\tortellini\tortellini.h" />
+    <file src="torteliniw.targets" target="build\torteliniw.targets" />
   </files>
 </package>

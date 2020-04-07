@@ -17,10 +17,8 @@ jobs:
     - name: Setup NuGet
       uses: warrenbuckley/Setup-Nuget@v1
       
-    - name: Setup MSBuild
-      uses: microsoft/setup-msbuild@v1.0.0
-      with:
-        vs-version: '16'
+    - name: Setup MSVC
+      uses: uses: ilammy/msvc-dev-cmd@v1
         
     - name: Unit Test
       run: |

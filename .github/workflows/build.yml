@@ -16,6 +16,15 @@ jobs:
         
     - name: Setup NuGet
       uses: warrenbuckley/Setup-Nuget@v1
+      
+    - name: Setup MSVC
+      uses: ilammy/msvc-dev-cmd@v1
+        
+    - name: Compile Unit Test
+      run: "cl.exe /EHsc /std:c++latest test.cc"
+      
+    #- name: Run Unit Test
+    #  run: "test.exe"
 
     - name: Nuget Pack
       working-directory: .

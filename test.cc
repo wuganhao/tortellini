@@ -1,4 +1,4 @@
-#include "./tortellini.hh"
+﻿#include "./tortellini.h"
 
 #include <iostream>
 #include <string>
@@ -6,7 +6,7 @@
 
 using namespace std;
 
-static const string ini_text = R"INI(
+static const wstring ini_text = LR"INI(
 naked = no
 
 [Sauce]
@@ -33,54 +33,54 @@ color = 0xAABBCCDD
 int main() {
 	tortellini::ini ini;
 
-	istringstream iss(ini_text);
+	std::wistringstream iss(ini_text);
 	iss >> ini;
 
-	ini["Runtime"]["string"] = "isn't this a beautiful string?";
-	ini["Runtime"]["some-int"] = 12345l;
-	ini["Runtime"]["some-true"] = true;
-	ini["Runtime"]["some-false"] = false;
-	ini[""]["naked"] = true;
-	ini["InTeGeRs"]["int"] = -12345;
-	ini["InTeGeRs"]["int"] = (int) -12345;
-	ini["InTeGeRs"]["long"] = -12345L;
-	ini["InTeGeRs"]["longlong"] = -12345LL;
-	ini["InTeGeRs"]["uint"] = 12345u;
-	ini["InTeGeRs"]["uint"] = (unsigned int) 12345;
-	ini["InTeGeRs"]["ulong"] = 12345L;
-	ini["InTeGeRs"]["ulonglong"] = 12345LL;
-	ini["InTeGeRs"]["float"] = 12.34f;
-	ini["InTeGeRs"]["double"] = 12.34;
-	ini["InTeGeRs"]["longdouble"] = 12.34L;
-	ini["othertest"]["int"] = "1234k";
+	ini[L"Runtime"  ][L"string"    ] = L"isn't this a beautiful string?"s;
+	ini[L"Runtime"  ][L"some-int"  ] = 12345l;
+	ini[L"Runtime"  ][L"some-true" ] = true;
+	ini[L"Runtime"  ][L"some-false"] = false;
+	ini[L""         ][L"naked"     ] = true;
+	ini[L"InTeGeRs" ][L"int"       ] = -12345;
+	ini[L"InTeGeRs" ][L"int"       ] = (int) -12345;
+	ini[L"InTeGeRs" ][L"long"      ] = -12345L;
+	ini[L"InTeGeRs" ][L"longlong"  ] = -12345LL;
+	ini[L"InTeGeRs" ][L"uint"      ] = 12345u;
+	ini[L"InTeGeRs" ][L"uint"      ] = (unsigned int) 12345;
+	ini[L"InTeGeRs" ][L"ulong"     ] = 12345L;
+	ini[L"InTeGeRs" ][L"ulonglong" ] = 12345LL;
+	ini[L"InTeGeRs" ][L"float"     ] = 12.34f;
+	ini[L"InTeGeRs" ][L"double"    ] = 12.34;
+	ini[L"InTeGeRs" ][L"longdouble"] = 12.34L;
+	ini[L"othertest"][L"int"       ] = L"1234k";
 
-	string foo = "a string";
-	ini["cpptypes"]["string"] = foo;
-	foo = ini["cpptypes"]["string"] | "nope";
+	std::wstring foo = L"a string";
+	ini[L"cpptypes"][L"string"] = foo;
+	foo = ini[L"cpptypes"][L"string"] | L"nope";
 
-	#define D(_s, _k, _f) std::cerr << "@@@ [" << (_s) << "] " << (_k) << " = " << (ini[(_s)][(_k)] | (_f)) << std::endl
-	D("pasta", "whole-wheat", "isn't set!");
-	D("RuNTiME", "string", "isn't set!");
-	D("RuNTiME", "string", true);
-	D("nOODLE FACE", "cute", false);
-	D("nOODLE FACE", "smiling", "not set!");
-	D("pasta", "al_dente", false);
-	D("HEXME", "color", 0L);
-	D("Integers", "int", 10);
-	D("Integers", "int", (int) 10);
-	D("Integers", "long", 10L);
-	D("Integers", "longlong", 10LL);
-	D("Integers", "uint", 10);
-	D("Integers", "uint", (unsigned int) 10);
-	D("Integers", "ulong", 10UL);
-	D("Integers", "ulonglong", 10ULL);
-	D("Integers", "float", 10.0f);
-	D("Integers", "double", 10.0);
-	D("Integers", "longdouble", 10.0L);
-	D("othertest", "int", 100);
+	#define D(_s, _k, _f) std::wcerr << L"@@@ [" << (_s) << L"] " << (_k) << L" = " << (ini[(_s)][(_k)] | (_f)) << std::endl
+	D(L"pasta",       L"whole-wheat", L"isn't set!");
+	D(L"RuNTiME",     L"string",      L"isn't set!");
+	D(L"RuNTiME",     L"string",      true);
+	D(L"nOODLE FACE", L"cute",        false);
+	D(L"nOODLE FACE", L"smiling",     L"not set!");
+	D(L"pasta",       L"al_dente",    false);
+	D(L"HEXME",       L"color",       0L);
+	D(L"Integers",    L"int",         10);
+	D(L"Integers",    L"int",         (int) 10);
+	D(L"Integers",    L"long",        10L);
+	D(L"Integers",    L"longlong",    10LL);
+	D(L"Integers",    L"uint",        10);
+	D(L"Integers",    L"uint",        (unsigned int) 10);
+	D(L"Integers",    L"ulong",       10UL);
+	D(L"Integers",    L"ulonglong",   10ULL);
+	D(L"Integers",    L"float",       10.0f);
+	D(L"Integers",    L"double",      10.0);
+	D(L"Integers",    L"longdouble",  10.0L);
+	D(L"othertest",   L"int",         100);
 	#undef D
-	std::cout << std::endl << "----------------" << std::endl << std::endl;
+	std::wcout << std::endl << L"----------------" << std::endl << std::endl;
 
-	cout << ini;
+	std::wcout << ini;
 	return 0;
 }

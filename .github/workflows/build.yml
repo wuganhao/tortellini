@@ -19,11 +19,12 @@ jobs:
       
     - name: Setup MSVC
       uses: ilammy/msvc-dev-cmd@v1
-    #  with:
-    #    arch: x86
         
-    - name: Unit Test
-      run: "cl.exe /EHsc /std:c++latest test.cc" # && test.exe
+    - name: Compile Unit Test
+      run: "cl.exe /EHsc /std:c++latest test.cc"
+      
+    - name: Run Unit Test
+      run: "test.exe"
 
     - name: Nuget Pack
       working-directory: .

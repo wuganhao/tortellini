@@ -20,7 +20,7 @@ jobs:
     - name: Setup MSBuild
       uses: microsoft/setup-msbuild@v1.0.0
       with:
-        vs-version: [16.0,16.5]
+        vs-version: '[16.0,16.5]'
         
     - name: Unit Test
       run: |
